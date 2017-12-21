@@ -11,7 +11,6 @@ title: 顶部菜单
 ----|------
 `header-fullscreen` | 全屏切换
 `header-icon` | 应用图标
-`header-langs` | 语言切换
 `header-notify` | 菜单通知
 `header-search` | 搜索框
 `header-storage` | 清除 LocalStorage 缓存

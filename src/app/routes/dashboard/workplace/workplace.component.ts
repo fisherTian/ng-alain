@@ -3,11 +3,12 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { getTimeDistance, yuan, fixedZero } from '@delon/abc';
 import { getNotice, getActivities } from '../../../../../_mock/api.service';
 import { getFakeChartData } from '../../../../../_mock/chart.service';
-
+import { WorkplaceService } from './workplace.service';
 @Component({
     selector: 'app-dashboard-workplace',
     templateUrl: './workplace.component.html',
-    styleUrls: ['./workplace.component.less']
+    styleUrls: ['./workplace.component.less'],
+    providers:[WorkplaceService]
 })
 export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
     notice: any[] = [];
@@ -76,9 +77,17 @@ export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
       ];
     // endregion
 
-    constructor(public msg: NzMessageService) {}
+    constructor(public msg: NzMessageService,public workplaceService:WorkplaceService) {}
 
     ngOnInit() {
+
+        this.workplaceService.loadData().then(res =>{
+            console.log(res);
+        },err=>{
+            console.log(err);
+        })
+
+
         setTimeout(() => {
             this.notice = getNotice();
             this.activities = getActivities().map((item: any) => {

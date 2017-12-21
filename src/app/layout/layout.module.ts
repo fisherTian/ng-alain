@@ -11,7 +11,6 @@ import { HeaderNotifyComponent } from './header/components/notify.component';
 import { HeaderTaskComponent } from './header/components/task.component';
 import { HeaderIconComponent } from './header/components/icon.component';
 import { HeaderFullScreenComponent } from './header/components/fullscreen.component';
-import { HeaderLangsComponent } from './header/components/langs.component';
 import { HeaderStorageComponent } from './header/components/storage.component';
 import { HeaderUserComponent } from './header/components/user.component';
 
@@ -29,7 +28,6 @@ const HEADERCOMPONENTS = [
     HeaderIconComponent,
     HeaderFullScreenComponent,
     HeaderThemeComponent,
-    HeaderLangsComponent,
     HeaderStorageComponent,
     HeaderUserComponent
 ];

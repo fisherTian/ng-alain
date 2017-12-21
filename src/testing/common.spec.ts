@@ -5,10 +5,8 @@ import { Type, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CoreModule } from '@core/core.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from 'app/app.module';
 import { HttpClient } from '@angular/common/http';
 import { ALAIN_I18N_TOKEN, ColorsService, SettingsService, MenuService, ScrollService, _HttpClient, ALAIN_THEME_OPTIONS } from '@delon/theme';
-import { I18NService } from '@core/i18n/i18n.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '@shared/shared.module';
 
@@ -30,19 +28,11 @@ export const setUpTestBed = (moduleDef: TestModuleMetadata) => {
         if (!moduleDef.imports) moduleDef.imports = [];
         moduleDef.imports.push(RouterTestingModule);
         moduleDef.imports.push(SharedModule.forRoot());
-        moduleDef.imports.push(TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (HttpLoaderFactory),
-                deps: [HttpClient]
-            }
-        }));
         // endregion
 
         // region: providers
         if (!moduleDef.providers) moduleDef.providers = [];
         moduleDef.providers.push({ provide: ALAIN_THEME_OPTIONS, useValue: {} });
-        moduleDef.providers.push({ provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false });
         // load full services
         [ SettingsService, MenuService, ScrollService, ColorsService, _HttpClient ].forEach((item: any) => {
             if (moduleDef.providers.includes(item)) return;

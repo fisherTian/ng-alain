@@ -12,9 +12,6 @@ import { AlainACLModule } from '@delon/acl';
 // third libs
 import { CountdownModule } from 'ngx-countdown';
 
-// i18n
-import { TranslateModule } from '@ngx-translate/core';
-import { I18NService } from '@core/i18n/i18n.service';
 
 // region: zorro modules
 
@@ -195,8 +192,6 @@ const ABCMODULES = [
         AlainThemeModule,
         ...ABCMODULES,
         AlainACLModule,
-        // i18n
-        TranslateModule,
         // third libs
         CountdownModule
     ]

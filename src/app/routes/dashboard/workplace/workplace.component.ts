@@ -75,6 +75,7 @@ export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
           link: '',
         },
       ];
+    data = '';
     // endregion
 
     constructor(public msg: NzMessageService,public workplaceService:WorkplaceService) {}
@@ -83,6 +84,7 @@ export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
 
         this.workplaceService.loadData().then(res =>{
             console.log(res);
+            this.data = res['data'];
         },err=>{
             console.log(err);
         })

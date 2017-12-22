@@ -1,5 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnDestroy, Inject } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler,
          HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent,
        } from '@angular/common/http';
@@ -9,17 +10,17 @@ import { catchError } from 'rxjs/operators';
 import { map, mergeMap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-
+import { SocialService, SocialOpenType, ITokenService, DA_SERVICE_TOKEN } from '@delon/auth';
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
  */
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-    constructor(private injector: Injector) {}
+    constructor(private injector: Injector,@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {}
 
     private goLogin() {
         const router = this.injector.get(Router);
-        this.injector.get(Router).navigate([ '/login' ]);
+        this.injector.get(Router).navigate([ '/pro/user/login' ]);
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
@@ -35,11 +36,13 @@ export class DefaultInterceptor implements HttpInterceptor {
         }*/
 
         url = environment.SERVER_URL + url;
-        console.log(url);
         const newReq = req.clone({
-            url: url
+            url: url,
+            setHeaders:{
+                'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+                'access-token':this.tokenService.get().token==null?'':this.tokenService.get().token
+            }
         });
-
         return next.handle(newReq).pipe(
                     mergeMap((event: any) => {
                         // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
@@ -52,9 +55,11 @@ export class DefaultInterceptor implements HttpInterceptor {
                     }),
                     catchError((res: HttpResponse<any>) => {
                         // 业务处理：一些通用操作
-                        console.log(res);
                         switch (res.status) {
                             case 401: // 未登录状态码
+                                this.goLogin();
+                                break;
+                            case 403: // 权限失效
                                 this.goLogin();
                                 break;
                             case 200:
@@ -63,6 +68,9 @@ export class DefaultInterceptor implements HttpInterceptor {
                                 break;
                             case 404:
                                 // 404
+                                break;
+                            default: // 权限失效
+                                this.goLogin();
                                 break;
                         }
                         // 以错误的形式结束本次请求

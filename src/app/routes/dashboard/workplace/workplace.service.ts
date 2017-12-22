@@ -11,10 +11,9 @@ export class WorkplaceService {
             .subscribe((res: any) => {
                 resolve(res);
             }, (err: HttpErrorResponse) => {
-                resolve(null);
+                reject(err);
             });
         });
-
     }
 
 }

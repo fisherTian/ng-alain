@@ -18,6 +18,7 @@ export class ACLComponent {
 
     private reMenu() {
         this.menuSrv.resume((item) => {
+            console.log(item);
             item.hide = item.acl && !this.aclService.can(item.acl);
         });
     }

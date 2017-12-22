@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd';
 import { SocialService, SocialOpenType, ITokenService, DA_SERVICE_TOKEN } from '@delon/auth';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ACLService } from '@delon/acl';
+import { MenuService } from '@delon/theme';
 
 @Component({
     selector: 'pro-user-login',
@@ -25,7 +27,10 @@ export class ProUserLoginComponent implements OnDestroy {
         public msg: NzMessageService,
         private settingsService: SettingsService,
         private socialService: SocialService,
+        private settingService: SettingsService,
         public http:HttpClient,
+        public aclServ:ACLService,
+        private menuSrv: MenuService,
         @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {
         this.form = fb.group({
             userName: [null, [Validators.required, Validators.minLength(5)]],
@@ -40,7 +45,11 @@ export class ProUserLoginComponent implements OnDestroy {
 
     // endregion
 
-
+    private reMenu() {
+        this.menuSrv.resume((item) => {
+            item.hide = item.acl && !this.aclServ.can(item.acl);
+        });
+    }
 
     submit() {
         this.error = '';
@@ -55,9 +64,27 @@ export class ProUserLoginComponent implements OnDestroy {
             .subscribe((res: any) => {
                 this.loading = false;
                 if(res.auth){
+
+                    let user = JSON.stringify(res.user);
+
+                    //存储token,用户信息以及角色
                     this.tokenService.set({
-                        token:res.token
+                        token:res.token,
+                        user:user,
+                        role:res.role
                     });
+
+                    //设置用户信息
+                    this.settingService.setUser({
+                        name: res.user.name,
+                        email: res.user.mail,
+                        avatar:res.user.avatar
+                    });
+
+                    //初始化菜单权限
+                    this.aclServ.setRole([res.role]);
+                    this.reMenu();
+
                     this.router.navigate(['/']);
                 }else{
                     this.error = `账号或密码错误`;

@@ -65,27 +65,42 @@ export class ProUserLoginComponent implements OnDestroy {
                 this.loading = false;
                 if(res.auth){
 
-                    let user = JSON.stringify(res.user);
+                    //登陆成功后，初始化菜单
+                    this.http.get('assets/app-data.json')
+                        .subscribe((_res: any) => {
 
-                    //存储token,用户信息以及角色
-                    this.tokenService.set({
-                        token:res.token,
-                        user:user,
-                        role:res.role
-                    });
+                            let user = JSON.stringify(res.user);
 
-                    //设置用户信息
-                    this.settingService.setUser({
-                        name: res.user.name,
-                        email: res.user.mail,
-                        avatar:res.user.avatar
-                    });
+                            //存储token,用户信息以及角色
+                            this.tokenService.set({
+                                token:res.token,
+                                user:user,
+                                role:res.role,
+                                menu:JSON.stringify(_res.menu)
+                            });
 
-                    //初始化菜单权限
-                    this.aclServ.setRole([res.role]);
-                    this.reMenu();
+                            //设置用户信息
+                            this.settingService.setUser({
+                                name: res.user.name,
+                                email: res.user.mail,
+                                avatar:res.user.avatar
+                            });
 
-                    this.router.navigate(['/']);
+                            this.menuSrv.clear();
+                            this.menuSrv.add(_res.menu);
+
+                            //初始化菜单权限
+                            this.aclServ.setRole([res.role]);
+                            this.reMenu();
+
+                            this.router.navigate(['/']);
+
+                        }, (err: HttpErrorResponse) => {
+
+                        });
+
+
+
                 }else{
                     this.error = `账号或密码错误`;
                 };

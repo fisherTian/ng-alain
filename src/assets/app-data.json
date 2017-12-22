@@ -37,5 +37,17 @@
                 "acl": "admin"
             }]
         }]
+    },{
+        "text": "扩展",
+        "group": true,
+        "children": [{
+            "text": "功能",
+            "link": "/extra",
+            "icon": "icon-cup",
+            "children": [{
+                "text": "增删改查",
+                "link": "/extra/poi"
+            }]
+        }]
     }]
 }

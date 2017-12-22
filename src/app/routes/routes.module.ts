@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 import { routes } from './routes';
 import { DashboardWorkplaceComponent } from './dashboard/workplace/workplace.component';
 import { ProUserLoginComponent } from './pro/user/login/login.component';
+import { ExtrasPoiComponent } from './poi/poi.component';
+import { ExtrasPoiEditComponent } from './poi/edit/edit.component';
 
 @NgModule({
     imports: [
@@ -16,7 +18,9 @@ import { ProUserLoginComponent } from './pro/user/login/login.component';
     ],
     declarations: [
         DashboardWorkplaceComponent,
-        ProUserLoginComponent
+        ProUserLoginComponent,
+        ExtrasPoiComponent,
+        ExtrasPoiEditComponent
     ],
     exports: [
         RouterModule

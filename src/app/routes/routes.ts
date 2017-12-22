@@ -4,6 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardWorkplaceComponent } from './dashboard/workplace/workplace.component';
 import { ProUserLoginComponent } from './pro/user/login/login.component';
 import { ProUserLayoutComponent } from '../layout/pro/user/user.component';
+import { ExtrasPoiComponent } from './poi/poi.component';
+import { ExtrasPoiEditComponent } from './poi/edit/edit.component';
 export const routes = [
     {
         path: '',
@@ -11,6 +13,7 @@ export const routes = [
         children: [
             { path: '', redirectTo: 'dashboard/workplace', pathMatch: 'full' },
             { path: 'dashboard/workplace', component: DashboardWorkplaceComponent, data: { translate: '工作台' } },
+            { path: 'extra/poi', component: ExtrasPoiComponent, data: { translate: '新增' } },
             { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' }
         ]
     },

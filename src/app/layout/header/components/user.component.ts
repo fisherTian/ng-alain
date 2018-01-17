@@ -41,6 +41,6 @@ export class HeaderUserComponent implements OnInit {
 
     logout() {
         this.tokenService.clear();
-        this.router.navigateByUrl('/pro/user/login');
+        this.router.navigateByUrl('/access/login');
     }
 }

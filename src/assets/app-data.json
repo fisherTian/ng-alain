@@ -1,7 +1,7 @@
 {
     "app": {
-        "name": "OpenApi",
-        "description": "Api管理系统"
+        "name": "认证授权中心",
+        "description": "认证授权中心"
     },
     "user": {
         "name": "Admin",
@@ -25,28 +25,11 @@
         "group": true,
         "children": [{
             "text": "权限管理",
-            "link": "/logics",
-            "icon": "icon-compass",
-            "children": [{
-                "text": "基于角色访问权限",
-                "link": "/logics/acl"
-            },
-            {
-                "text": "路由守卫",
-                "link": "/logics/guard",
-                "acl": "admin"
-            }]
-        }]
-    },{
-        "text": "扩展",
-        "group": true,
-        "children": [{
-            "text": "功能",
-            "link": "/extra",
+            "link": "/system",
             "icon": "icon-cup",
             "children": [{
-                "text": "增删改查",
-                "link": "/extra/poi"
+                "text": "人员管理",
+                "link": "/system/user"
             }]
         }]
     }]

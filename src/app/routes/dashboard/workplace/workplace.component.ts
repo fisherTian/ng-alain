@@ -82,12 +82,12 @@ export class DashboardWorkplaceComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this.workplaceService.loadData().then(res =>{
+        /*this.workplaceService.loadData().then(res =>{
             console.log(res);
             this.data = res['data'];
         },err=>{
             console.log(err);
-        })
+        })*/
 
 
         setTimeout(() => {

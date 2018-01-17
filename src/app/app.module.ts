@@ -34,7 +34,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         RoutesModule,
         // auth
         AlainAuthModule.forRoot({
-            login_url: `/pro/user/login`
+            login_url: `/access/login`
         })
     ],
     providers: [

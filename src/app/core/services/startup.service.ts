@@ -21,7 +21,7 @@ export class StartupService {
 
     private goLogin() {
         const router = this.injector.get(Router);
-        this.injector.get(Router).navigate([ '/pro/user/login' ]);
+        this.injector.get(Router).navigate([ '/access/login' ]);
     }
 
     load(): Promise<any> {

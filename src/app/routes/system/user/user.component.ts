@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ScUserService } from './user.service';
 import { ModalHelper } from '@delon/theme';
 import { ScUserEditComponent } from './edit/edit.component';
+import { NzModalService,NzMessageService } from 'ng-zorro-antd';
 @Component({
     selector: 'system-user',
     templateUrl: './user.component.html',
@@ -34,7 +35,27 @@ export class ScUserComponent implements OnInit, OnDestroy {
         });
     }
 
-    constructor(public scUserService:ScUserService,private modalHelper: ModalHelper) {}
+    delete(item) {
+        this.modal.open({
+            title: '确认框',
+            content: '确认删除？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
+                for(let i=0;i<this.list.length;i++){
+                    if(this.list[i].userId == item.userId){
+                        this.list.splice(i,1);
+                    }
+                }
+                this.msg.success('删除成功!');
+            },
+            onCancel: () => {
+
+            }
+        });
+    }
+
+    constructor(public scUserService:ScUserService,private modalHelper: ModalHelper,private modal: NzModalService,private msg: NzMessageService) {}
 
     ngOnInit() {
 

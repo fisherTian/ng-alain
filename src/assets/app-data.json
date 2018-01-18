@@ -30,6 +30,9 @@
             "children": [{
                 "text": "人员管理",
                 "link": "/system/user"
+            },{
+                "text": "部门管理",
+                "link": "/system/dept"
             }]
         }]
     }]

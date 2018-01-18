@@ -1,0 +1,72 @@
+<div class="content__title">
+    <h1>
+        部门管理
+    </h1>
+</div>
+<div nz-row [nzGutter]="16">
+    <div nz-col [nzMd]="6">
+
+        <nz-card nzTitle="部门管理">
+
+            <button nz-button [nzType]="'primary'" [disabled]="disabled" class="mr-sm">
+                <span>新增</span>
+            </button>
+
+            <button nz-button [nzType]="'danger'" [disabled]="disabled" class="mr-sm">
+                <span>删除</span>
+            </button>
+            <br>
+            <nz-tree [nzNodes]="nodes"
+                     [nzShowLine]="true"
+                     (nzEvent)="onEvent($event)"></nz-tree>
+        </nz-card>
+    </div>
+
+    <div nz-col [nzMd]="18">
+        <nz-card nzTitle="部门详细信息">
+            <form nz-form (ngSubmit)="submit()" role="form">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="deptId" nz-form-item-required>部门编号</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'deptId'" [(ngModel)]="dept.deptId" name="deptId" [nzPlaceHolder]="'请输入部门编号'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="orgId" nz-form-item-required>机构编号</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'orgId'" [(ngModel)]="dept.orgId" name="orgId" [nzPlaceHolder]="'请输入机构编号'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="name" nz-form-item-required>名称</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'name'" [(ngModel)]="dept.name" name="name" [nzPlaceHolder]="'请输入名称'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="desc" >描述</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzType]="'textarea'" [(ngModel)]="dept.desc" name="desc" [nzPlaceHolder]="'请输入描述'"></nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row class="mb0">
+                    <div nz-form-control nz-col [nzSpan]="14" [nzXs]="24" [nzOffset]="6">
+                        <button nz-button [nzType]="'primary'">保存</button>
+                    </div>
+                </div>
+            </form>
+        </nz-card>
+    </div>
+</div>
+

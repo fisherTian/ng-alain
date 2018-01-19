@@ -39,6 +39,9 @@
             },{
                 "text": "菜单管理",
                 "link": "/system/menu"
+            },{
+                "text": "角色管理",
+                "link": "/system/role"
             }]
         }]
     }]

@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <div class="modal-title">关联用户组</div>
+</div>
+<form nz-form [nzLayout]="'inline'" class="search-form">
+    <div nz-form-item>
+        <div nz-form-control>
+            <nz-input [(ngModel)]="query.groupId" name="groupId" nzPlaceHolder="用户组编号"></nz-input>
+        </div>
+    </div>
+    <div nz-form-item>
+        <div nz-form-control>
+            <nz-input [(ngModel)]="query.name" name="name" nzPlaceHolder="名称"></nz-input>
+        </div>
+    </div>
+    <div nz-form-item>
+        <div nz-form-control>
+            <button nz-button (click)="load(true)">搜索</button>
+        </div>
+    </div>
+</form>
+<nz-table #nzTable class="simple-table"
+          [nzAjaxData]="list"
+          [nzTotal]="total"
+          [(nzPageIndex)]="currentPage"
+          [(nzPageSize)]="pageSize"
+          (nzPageIndexChange)="load()"
+          [nzBordered]="true"
+          [nzSize]="'middle'">
+    <thead nz-thead>
+    <tr>
+        <th nz-th [nzCheckbox]="true">
+            <label nz-checkbox [(ngModel)]="_allChecked" (ngModelChange)="_checkAll($event)">
+            </label>
+        </th>
+        <th nz-th>用户组编号</th>
+        <th nz-th>机构编号</th>
+        <th nz-th>名称</th>
+        <th nz-th>描述</th>
+    </tr>
+    </thead>
+    <tbody nz-tbody>
+    <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+        <td nz-td [nzCheckbox]="true">
+            <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="_refreshStatus($event)">
+            </label>
+        </td>
+        <td>{{item.groupId}}</td>
+        <td>{{item.orgId}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.desc}}</td>
+    </tr>
+    </tbody>
+</nz-table>
+<div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button [nzType]="'primary'" (click)="close()">保存</button>
+</div>

@@ -8,15 +8,21 @@ import { ScMenuComponent } from './menu/menu.component';
 import { ScGroupComponent } from './group/group.component';
 import { ScGroupEditComponent } from './group/edit/edit.component';
 import { ScGroupUserComponent } from './group/user/user.component';
+import { ScRoleComponent } from './role/role.component';
+import { ScRoleEditComponent } from './role/edit/edit.component';
+import { ScRoleUserComponent } from './role/user/user.component';
+import { ScRoleGroupComponent } from './role/group/group.component';
+import { ScRoleMenuComponent } from './role/menu/menu.component';
 import { NzTreeModule } from 'ng-tree-antd';
 const routes: Routes = [
     { path: 'user', component: ScUserComponent },
     { path: 'dept', component: ScDeptComponent },
     { path: 'menu', component: ScMenuComponent },
-    { path: 'group', component: ScGroupComponent }
+    { path: 'group', component: ScGroupComponent },
+    { path: 'role', component: ScRoleComponent }
 ];
 
-const COMPONENTS_NOROUNT = [ ScUserEditComponent,ScGroupEditComponent,ScGroupUserComponent ];
+const COMPONENTS_NOROUNT = [ ScUserEditComponent,ScGroupEditComponent,ScGroupUserComponent,ScRoleEditComponent,ScRoleUserComponent,ScRoleGroupComponent,ScRoleMenuComponent ];
 
 @NgModule({
     imports: [
@@ -30,6 +36,7 @@ const COMPONENTS_NOROUNT = [ ScUserEditComponent,ScGroupEditComponent,ScGroupUse
         ScDeptComponent,
         ScMenuComponent,
         ScGroupComponent,
+        ScRoleComponent,
         ...COMPONENTS_NOROUNT
     ],
     exports: [

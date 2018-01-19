@@ -1,0 +1,58 @@
+<div class="content__title">
+    <h1>角色管理</h1>
+    <button nz-button (click)="edit({id:0})" [nzType]="'primary'">添加</button>
+</div>
+<form nz-form [nzLayout]="'inline'" class="search-form">
+    <div nz-form-item>
+        <div nz-form-control>
+            <nz-input [(ngModel)]="query.roleId" name="roleId" nzPlaceHolder="角色编号"></nz-input>
+        </div>
+    </div>
+    <div nz-form-item>
+        <div nz-form-control>
+            <nz-input [(ngModel)]="query.name" name="name" nzPlaceHolder="角色名称"></nz-input>
+        </div>
+    </div>
+    <div nz-form-item>
+        <div nz-form-control>
+            <button nz-button (click)="load(true)">搜索</button>
+        </div>
+    </div>
+</form>
+<nz-table #nzTable class="simple-table"
+          [nzAjaxData]="list"
+          [nzTotal]="total"
+          [(nzPageIndex)]="currentPage"
+          [(nzPageSize)]="pageSize"
+          (nzPageIndexChange)="load()"
+          [nzBordered]="true"
+          [nzSize]="'middle'">
+    <thead nz-thead>
+    <tr>
+        <th nz-th [nzWidth]="'100px'">用户组编号</th>
+        <th nz-th>机构编号</th>
+        <th nz-th>名称</th>
+        <th nz-th>描述</th>
+        <th nz-th [nzWidth]="'180px'">操作</th>
+    </tr>
+    </thead>
+    <tbody nz-tbody>
+    <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+        <td>{{item.roleId}}</td>
+        <td>{{item.orgId}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.desc}}</td>
+        <td>
+            <a (click)="edit(item)">编辑</a>
+            <span nz-table-divider></span>
+            <a (click)="delete(item)">删除</a>
+            <span nz-table-divider></span>
+            <a (click)="bindUser(item)">关联用户</a>
+            <span nz-table-divider></span>
+            <a (click)="bindGroup(item)">关联用户组</a>
+            <span nz-table-divider></span>
+            <a (click)="bindMenu(item)">关联菜单</a>
+        </td>
+    </tr>
+    </tbody>
+</nz-table>

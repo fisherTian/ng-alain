@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <div class="modal-title">关联菜单</div>
+</div>
+<nz-tree [nzNodes]="nodes"
+         [nzCheckable]="true"
+         (nzEvent)="onEvent($event)"></nz-tree>
+<div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
+</div>

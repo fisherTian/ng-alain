@@ -31,6 +31,9 @@
                 "text": "人员管理",
                 "link": "/system/user"
             },{
+                "text": "用户组管理",
+                "link": "/system/group"
+            },{
                 "text": "部门管理",
                 "link": "/system/dept"
             },{

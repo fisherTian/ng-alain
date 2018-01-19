@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <div class="modal-title">{{item.groupId > 0 ? '编辑' : '添加'}}-用户组</div>
+</div>
+<form #f="ngForm" (ngSubmit)="save()" nz-form [nzType]="'horizontal'">
+    <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="4"><label>用户组编号</label></div>
+        <div nz-form-control nz-col [nzSpan]="8">
+            <input nz-input [(ngModel)]="item.groupId" name="groupId" maxlength="30" required />
+            <p nz-form-explain>如：11003108</p>
+        </div>
+        <div nz-form-label nz-col [nzSpan]="4"><label>机构编号</label></div>
+        <div nz-form-control nz-col [nzSpan]="8">
+            <input nz-input [(ngModel)]="item.orgId" name="orgId" maxlength="20" required />
+            <p nz-form-explain>如：11</p>
+        </div>
+    </div>
+    <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="4"><label>名称</label></div>
+        <div nz-form-control nz-col [nzSpan]="8">
+            <input nz-input [(ngModel)]="item.name" name="name" maxlength="20" required />
+            <p nz-form-explain>如：11</p>
+        </div>
+        <div nz-form-label nz-col [nzSpan]="4"><label>描述</label></div>
+        <div nz-form-control nz-col [nzSpan]="8">
+            <input nz-input [(ngModel)]="item.desc" name="desc" maxlength="50" required />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button [disabled]="!f.form.valid || !f.form.dirty" [nzType]="'primary'">保存</button>
+    </div>
+</form>

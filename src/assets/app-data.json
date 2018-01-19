@@ -33,6 +33,9 @@
             },{
                 "text": "部门管理",
                 "link": "/system/dept"
+            },{
+                "text": "菜单管理",
+                "link": "/system/menu"
             }]
         }]
     }]

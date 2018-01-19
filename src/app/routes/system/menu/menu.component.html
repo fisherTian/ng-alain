@@ -1,0 +1,178 @@
+<div class="content__title">
+    <h1>
+        菜单管理
+    </h1>
+</div>
+<div nz-row [nzGutter]="16">
+    <div nz-col [nzMd]="6">
+
+        <nz-card nzTitle="菜单列表">
+
+            <button nz-button [nzType]="'primary'" [disabled]="disabled" class="mr-sm">
+                <span>新增</span>
+            </button>
+
+            <button nz-button [nzType]="'danger'" [disabled]="disabled" class="mr-sm">
+                <span>删除</span>
+            </button>
+            <br>
+            <nz-tree [nzNodes]="nodes"
+                     [nzShowLine]="true"
+                     (nzEvent)="onEvent($event)"></nz-tree>
+        </nz-card>
+    </div>
+
+    <div nz-col [nzMd]="18">
+        <nz-card nzTitle="菜单详细信息">
+            <form nz-form (ngSubmit)="submit()" role="form">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="path" nz-form-item-required>路径编码</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'menuId'" [(ngModel)]="menu.path" name="path" [nzPlaceHolder]="'请输入路径编码'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="title" nz-form-item-required>标题</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'title'" [(ngModel)]="menu.title" name="title" [nzPlaceHolder]="'请输入标题'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="icon" nz-form-item-required>图标</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'icon'" [(ngModel)]="menu.icon" name="icon" [nzPlaceHolder]="'请输入图标'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="resource" nz-form-item-required>资源路径</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'resource'" [(ngModel)]="menu.resource" name="resource" [nzPlaceHolder]="'请输入资源路径'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="type" nz-form-item-required>类型</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-select [(ngModel)]="menu.type" [nzPlaceHolder]="'请选择类型'" name="type" nzAllowClear>
+                            <nz-option
+                                *ngFor="let option of options"
+                                [nzLabel]="option.label"
+                                [nzValue]="option"
+                                [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="index" nz-form-item-required>排序</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'index'" [(ngModel)]="menu.index" name="index" [nzPlaceHolder]="'请输入排序'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="desc" nz-form-item-required>描述</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'desc'" [(ngModel)]="menu.desc" name="desc" [nzPlaceHolder]="'请输入描述'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                        <label for="component" nz-form-item-required>前端组件</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                        <nz-input [nzId]="'component'" [(ngModel)]="menu.component" name="component" [nzPlaceHolder]="'请输入前端组件'">
+                        </nz-input>
+                    </div>
+                </div>
+                <div nz-form-item nz-row class="mb0">
+                    <div nz-form-control nz-col [nzSpan]="14" [nzXs]="24" [nzOffset]="6">
+                        <button nz-button [nzType]="'primary'">保存</button>
+                    </div>
+                </div>
+            </form>
+        </nz-card>
+    </div>
+
+    <div nz-col [nzMd]="6">
+    </div>
+
+    <div nz-col [nzMd]="18">
+
+        <nz-card nzTitle="按钮或资源">
+
+            <form nz-form [nzLayout]="'inline'" class="search-form">
+                <div nz-form-item>
+                    <div nz-form-control>
+                        <nz-input [(ngModel)]="query.name" name="name" nzPlaceHolder="资源名称"></nz-input>
+                    </div>
+                </div>
+                <div nz-form-item>
+                    <div nz-form-control>
+                        <button nz-button (click)="load(true)">搜索</button>
+                        <button nz-button (click)="load(true)">新增</button>
+                    </div>
+                </div>
+            </form>
+            <nz-table #nzTable class="simple-table"
+                      [nzAjaxData]="list"
+                      [nzTotal]="total"
+                      [(nzPageIndex)]="currentPage"
+                      [(nzPageSize)]="pageSize"
+                      (nzPageIndexChange)="load()"
+                      [nzBordered]="true"
+                      [nzSize]="'middle'">
+                <thead nz-thead>
+                <tr>
+                    <th nz-th [nzWidth]="'100px'">id</th>
+                    <th nz-th>资源编码</th>
+                    <th nz-th>资源类型</th>
+                    <th nz-th>资源名称</th>
+                    <th nz-th>资源地址</th>
+                    <th nz-th>资源请求类型</th>
+                    <th nz-th>描述</th>
+                    <th nz-th [nzWidth]="'180px'">操作</th>
+                </tr>
+                </thead>
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of nzTable.data">
+                    <td>{{item.id}}</td>
+                    <td>{{item.code}}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.reqType}}</td>
+                    <td>{{item.desc}}</td>
+                    <td>
+                        <a (click)="edit(item)">编辑</a>
+                        <span nz-table-divider></span>
+                        <a (click)="delete(item)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </nz-table>
+
+        </nz-card>
+
+    </div>
+
+</div>
+
